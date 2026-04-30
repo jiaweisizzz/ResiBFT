@@ -1,0 +1,19 @@
+#ifndef PARAMETERS_H
+#define PARAMETERS_H
+
+//#define BASIC_HOTSUS
+
+// 生产模式配置
+#ifdef PRODUCTION_MODE
+#define MAX_NUM_NODES 1000
+#define MAX_NUM_SIGNATURES 999
+#else
+#define MAX_NUM_NODES 211
+#define MAX_NUM_SIGNATURES 210
+#endif
+
+#define MAX_NUM_TRANSACTIONS 400
+#define MAX_NUM_GROUPMEMBERS 210
+#define PAYLOAD_SIZE 0
+
+#endif

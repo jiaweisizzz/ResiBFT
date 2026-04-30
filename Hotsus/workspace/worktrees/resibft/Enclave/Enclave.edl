@@ -1,0 +1,58 @@
+enclave
+{
+    from "sgx_tsgxssl.edl" import *;
+    include "../App/config.h"
+    include "../App/types.h"
+    include "../App/key.h"
+    include "../Enclave/EnclaveUsertypes.h"
+
+	// ECALLs
+    trusted
+	{
+        public sgx_status_t initializeVariables_t([in] ReplicaID *me, [in] Pids_t *others, [in] unsigned int *GeneralQuorumSize, [in] unsigned int *TrustedQuorumSize);
+        public sgx_status_t setTrustedQuorumSize_t([in] unsigned int *TrustedQuorumSize);
+		
+        public sgx_status_t TEE_verifyProposalDamysus([in] Proposal_t *proposal_t, [in] Signs_t *signs_t, [out] bool *b);
+        public sgx_status_t TEE_verifyJustificationDamysus([in] Justification_t *justification_t, [out] bool *b);
+        public sgx_status_t TEE_initializeMsgNewviewDamysus([out] Justification_t *justification_MsgNewview_t);
+        public sgx_status_t TEE_initializeAccumulatorDamysus([in] Justifications_t *justifications_MsgNewview_t, [out] Accumulator_t *accumulator_MsgLdrprepare_t);
+        public sgx_status_t TEE_initializeMsgLdrprepareDamysus([in] Proposal_t *proposal_MsgLdrprepare_t, [out] Signs_t *signs_MsgLdrprepare_t);
+        public sgx_status_t TEE_respondProposalDamysus([in] Hash_t *proposeHash_t, [in] Accumulator_t *accumulator_MsgLdrprepare_t, [out] Justification_t *justification_MsgPrepare_t);
+        public sgx_status_t TEE_saveMsgPrepareDamysus([in] Justification_t *justification_MsgPrepare_t, [out] Justification_t *justification_MsgPrecommit_t);
+
+        public sgx_status_t TEE_verifyProposalHotsus([in] Proposal_t *proposal_t, [in] Signs_t *signs_t, [out] bool *b);
+        public sgx_status_t TEE_verifyExproposalHotsus([in] Exproposal_t *exproposal_t, [in] Signs_t *signs_t, [out] bool *b);
+        public sgx_status_t TEE_verifyJustificationHotsus([in] Justification_t *justification_t, [out] bool *b);
+        public sgx_status_t TEE_changeSwitcher();
+        public sgx_status_t TEE_changeAuthenticator();
+        public sgx_status_t TEE_initializeMsgNewviewHotsus([out] Justification_t *justification_MsgNewview_t);
+        public sgx_status_t TEE_initializeAccumulatorHotsus([in] Justifications_t *justifications_MsgNewview_t, [out] Accumulator_t *accumulator_MsgLdrprepare_t);
+        public sgx_status_t TEE_initializeMsgLdrprepareHotsus([in] Proposal_t *proposal_MsgLdrprepare_t, [out] Signs_t *signs_MsgLdrprepare_t);
+        public sgx_status_t TEE_respondProposalHotsus([in] Hash_t *proposeHash_t, [in] Accumulator_t *accumulator_MsgLdrprepare_t, [out] Justification_t *justification_MsgPrepare_t);
+        public sgx_status_t TEE_saveMsgPrepareHotsus([in] Justification_t *justification_MsgPrepare_t, [out] Justification_t *justification_MsgPrecommit_t);
+        public sgx_status_t TEE_initializeMsgExnewviewHotsus([out] Justification_t *justification_MsgExnewview_t);
+        public sgx_status_t TEE_respondExproposalHotsus([in] Hash_t *proposeHash_t, [in] Justification_t *justification_MsgExnewview_t, [out] Justification_t *justification_MsgExprepare_t);
+        public sgx_status_t TEE_initializeMsgExldrprepareHotsus([in] Exproposal_t *proposal_MsgExldrprepare_t, [out] Signs_t *signs_MsgExldrprepare_t);
+        public sgx_status_t TEE_saveMsgExprepareHotsus([in] Justification_t *justification_MsgExprepare_t, [out] Justification_t *justification_MsgExprecommit_t);
+        public sgx_status_t TEE_lockMsgExprecommitHotsus([in] Justification_t *justification_MsgExprecommit_t, [out] Justification_t *justification_MsgExcommit_t);
+
+        // ResiBFT ECALLs - using lightweight structures to avoid parameter size limits
+        public sgx_status_t TEE_verifyProposalResiBFT([in] Proposal_t *proposal_t, [in] Signs_t *signs_t, [out] bool *b);
+        public sgx_status_t TEE_verifyJustificationResiBFT([in] Justification_t *justification_t, [out] bool *b);
+        public sgx_status_t TEE_verifyBlockCertificateResiBFT([in] BlockCertificate_t *blockCertificate_t, [out] bool *b);
+        public sgx_status_t TEE_setViewResiBFT([in] View *view);
+        public sgx_status_t TEE_initializeMsgNewviewResiBFT([out] JustificationLight_t *justification_t);
+        public sgx_status_t TEE_initializeAccumulatorResiBFT([in] AccumulatorInput_t *input_t, [out] Accumulator_t *accumulator_t);
+        public sgx_status_t TEE_initializeMsgLdrprepareResiBFT([in] Hash_t *proposalHash_t, [out] SignSingle_t *sign_t);
+        public sgx_status_t TEE_respondProposalResiBFT([in] Hash_t *proposeHash_t, [in] Accumulator_t *accumulator_t, [out] JustificationLight_t *justification_t);
+        public sgx_status_t TEE_saveMsgPrepareResiBFT([in] RoundData_t *roundData_t, [out] JustificationLight_t *justification_t);
+        public sgx_status_t TEE_createVCResiBFT([in] VCType_t *type, [in] View *view, [in] Hash_t *blockHash, [out] VerificationCertificate_t *vc_t);
+        public sgx_status_t TEE_validateBlockResiBFT([in] Block_t *block_t, [out] bool *b);
+    };
+
+	// OCALLs
+    untrusted
+	{	
+        void TEE_Print([in, string] const char* text);
+    };
+};
