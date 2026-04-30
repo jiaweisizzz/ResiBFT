@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e854bd29-1baf-4f37-a3d9-48ee645b2bfc" name="香港">
+        <fileTransfer accessType="SFTP" host="47.86.182.194" port="22" sshConfigId="da0e21ff-3751-4a5b-b639-b96c40dfecf3" sshConfig="root@47.86.182.194:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="83fd57f5-10ac-4654-b2bd-3bf1081b55cc" name="香港213">
+        <fileTransfer accessType="SFTP" host="47.86.232.213" port="22" sshConfigId="538fd10d-d8cc-43c6-8d5e-0609fe3ce149" sshConfig="root@47.86.232.213:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="c6b3a8ce-1031-495f-8589-5263d0e08223" name="香港75">
+        <fileTransfer accessType="SFTP" host="47.242.18.75" port="22" sshConfigId="3a9d7cc1-589e-44d4-86a6-6f6583b079e4" sshConfig="root@47.242.18.75:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
