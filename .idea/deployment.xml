@@ -20,7 +20,7 @@
       <paths name="香港75">
         <serverdata>
           <mappings>
-            <mapping deploy="/root/Hotsus" local="$PROJECT_DIR$/Hotsus" web="/" />
+            <mapping deploy="/root/Hotsus" local="$PROJECT_DIR$/" web="/" />
           </mappings>
         </serverdata>
       </paths>
